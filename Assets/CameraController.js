@@ -8,7 +8,10 @@ function Start () {
 	this.currentSize = this.camera.orthographicSize;
 	var rect = this.camera.rect;
 	var wDiff = this.LeftCorner.x + this.transform.position.x - rect.width/2;
-	Debug.Log(rect);
+	var hDiff = this.LeftCorner.y + this.transform.position.y - rect.height/2;
+	this.transform.position.x -= wDiff;
+	this.transform.position.y -= hDiff;
+	Debug.Log(hDiff);
 	
 }
 

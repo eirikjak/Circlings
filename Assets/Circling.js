@@ -6,6 +6,8 @@ private var radius:float;
 public var JumpPower:float = 1.8;
 public var Speed:float = 70;
 private var isTouchingCircling:boolean;
+
+
 function Start () {
 	
 	radius = (this.collider2D as CircleCollider2D).radius*this.transform.localScale.x;
@@ -29,10 +31,12 @@ function IsNextToWall(){
 	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
 	return ray.collider != null;
 }
+
 function ShouldJump(){
 	
 	return IsNextToWall() && (IsOnGround() || this.isTouchingCircling);
 }
+
 
 function OnCollisionEnter2D(col:Collision2D){
 	
@@ -43,6 +47,7 @@ function OnCollisionEnter2D(col:Collision2D){
 	}
 	
 }
+
 
 function OnCollisionExit2D(col:Collision2D){
 	if(col.gameObject.layer == this.gameObject.layer)
@@ -60,7 +65,7 @@ function IsOnGround(){
 }
 
 function Jump(){
-	Debug.Log("Jump");
+	
 	this.rigidbody2D.velocity.y = 0;
 	this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.deltaTime));
 		
