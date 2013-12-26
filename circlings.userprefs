@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Circling.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CameraController.js">
     <Files>
-      <File FileName="Assets\Circling.js" Line="35" Column="3" />
+      <File FileName="Assets\Level Assets\Goal.js" Line="13" Column="34" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\ZoomCamera.js" Line="44" Column="2" />
+      <File FileName="Assets\CameraController.js" Line="9" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
