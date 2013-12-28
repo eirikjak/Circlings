@@ -6,12 +6,15 @@ public var LeftCorner:Vector2;
 private var currentSize:float;
 function Start () {
 	this.currentSize = this.camera.orthographicSize;
+	
 	var rect = this.camera.rect;
-	var wDiff = this.LeftCorner.x + this.transform.position.x - rect.width/2;
-	var hDiff = this.LeftCorner.y + this.transform.position.y - rect.height/2;
+	var wDiff = this.transform.position.x - rect.width*currentSize*this.camera.aspect - this.LeftCorner.x;
+	var hDiff = this.transform.position.y - rect.height*currentSize - this.LeftCorner.y;
 	this.transform.position.x -= wDiff;
 	this.transform.position.y -= hDiff;
 	Debug.Log(hDiff);
+	Debug.Log(wDiff);
+	Debug.Log(this.camera.aspect);
 	
 }
 
