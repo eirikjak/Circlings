@@ -1,10 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CameraController.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Camera\RightZoomCamera.js">
     <Files>
-      <File FileName="Assets\Level Assets\Goal.js" Line="13" Column="34" />
-      <File FileName="Assets\Standard Assets (Mobile)\Scripts\ZoomCamera.js" Line="44" Column="2" />
-      <File FileName="Assets\CameraController.js" Line="9" Column="2" />
+      <File FileName="Assets\Level Assets\Goal.js" Line="7" Column="14" />
+      <File FileName="Assets\Level Assets\Launcher.js" Line="1" Column="1" />
+      <File FileName="Assets\Circling.js" Line="1" Column="1" />
+      <File FileName="Assets\GUI\PieceMenuController.js" Line="1" Column="1" />
+      <File FileName="Assets\GUI\MenuButton.js" Line="19" Column="2" />
+      <File FileName="Assets\BoundTest.js" Line="4" Column="2" />
+      <File FileName="Assets\LevelController.js" Line="10" Column="41" />
+      <File FileName="Assets\Camera\RightZoomCamera.js" Line="8" Column="2" />
+      <File FileName="Assets\Camera\AutoAdjustCamera.js" Line="3" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
