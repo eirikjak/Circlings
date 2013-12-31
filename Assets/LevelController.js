@@ -1,13 +1,14 @@
 ﻿#pragma strict
 public var LevelContainer:GameObject;
 public var Menu:GameObject;
-private var menuHeight:float = 0.5;
+private var menuHeight:float = 0.1;
 function Start () {
-	var bound = ComputeBounds(LevelContainer);
-	LevelContainer.transform.localPosition.x += bound.extents.x + menuHeight;
-	LevelContainer.transform.localPosition.y += bound.extents.y + menuHeight;
 	var menuBound = ComputeBounds(Menu);
-	Menu.gameObject.transform.position = Vector3(0,menuBound.extents.y/2,0);
+	Menu.gameObject.transform.position = Vector3(0.1,menuBound.extents.y/2,0);
+	var bound = ComputeBounds(LevelContainer);
+	LevelContainer.transform.localPosition.x += bound.extents.x;
+	LevelContainer.transform.localPosition.y += bound.extents.y + menuBound.extents.y;
+
 	
 	
 }

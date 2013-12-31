@@ -20,7 +20,7 @@ function Start () {
 	this.levelBounds = ComputeBounds(LevelContainer);
 	levelBottom = this.camera.WorldToScreenPoint(Vector3(0,this.levelBounds.center.y - this.levelBounds.extents.y,0)).y;
 	levelLeft = this.camera.WorldToScreenPoint(Vector3(this.levelBounds.center.x - this.levelBounds.extents.x,0,0)).x;
-	Debug.Log("left:" + levelLeft);
+
 }
 
 
@@ -39,8 +39,7 @@ function Update () {
 	var newLevelLeft = this.camera.WorldToScreenPoint(Vector3(this.levelBounds.center.x - this.levelBounds.extents.x,0,0)).x;
 	var screenHDiff = levelBottom - newLevelBottom;
 	var screenWDiff = levelLeft - newLevelLeft;
-	
-	Debug.Log(screenWDiff);
+
 	this.transform.position.y -= (this.camera.orthographicSize*2)*(screenHDiff/Screen.height);
 	this.transform.position.x -= (this.camera.orthographicSize*2*this.camera.aspect)*(screenWDiff/Screen.width);
 	
