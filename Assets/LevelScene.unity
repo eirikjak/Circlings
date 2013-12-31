@@ -777,10 +777,16 @@ MonoBehaviour:
   Pieces:
   - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
     ButtonSprite: {fileID: 21300000, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
-    Count: 3
+    Count: 1
   - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
     ButtonSprite: {fileID: 21300002, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
-    Count: 3
+    Count: 2
+  - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
+    ButtonSprite: {fileID: 21300006, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
+    Count: 1
+  - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
+    ButtonSprite: {fileID: 21300008, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
+    Count: 1
   Background: {fileID: 0}
 --- !u!4 &1222319030
 Transform:

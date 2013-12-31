@@ -72,5 +72,23 @@ TextureImporter:
         height: 40
       alignment: 0
       pivot: {x: .5, y: .5}
+    - name: blue blocks_3
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 46
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: blue blocks_4
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 3
+        width: 79
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 
