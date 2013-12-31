@@ -8,6 +8,14 @@ private var levelBounds:Bounds;
 private var levelBottom:float;
 private var levelLeft:float;
 function Start () {
+
+	var currentSize = this.camera.orthographicSize;
+	var rect = this.camera.rect;
+	var wDiff = this.transform.position.x - rect.width*currentSize*this.camera.aspect;
+	var hDiff = this.transform.position.y - rect.height*currentSize;
+	this.transform.position.x -= wDiff;
+	this.transform.position.y -= hDiff;
+
 	this.currentSize = this.camera.orthographicSize;
 	this.levelBounds = ComputeBounds(LevelContainer);
 	levelBottom = this.camera.WorldToScreenPoint(Vector3(0,this.levelBounds.center.y - this.levelBounds.extents.y,0)).y;
