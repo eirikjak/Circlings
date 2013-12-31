@@ -14,6 +14,7 @@ function Update () {
 function BeginDrag(){
 	Debug.Log("Begin");
 	this.draggingPiece = Instantiate(this.Piece);
+	(this.draggingPiece.renderer as SpriteRenderer).sprite = (this.renderer as SpriteRenderer).sprite;
 	this.renderer.material.color.a = 0.5;
 
 }

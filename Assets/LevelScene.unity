@@ -781,11 +781,11 @@ MonoBehaviour:
   - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
     ButtonSprite: {fileID: 21300002, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
     Count: 2
-  - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
+  - Piece: {fileID: 100000, guid: 77f7af4707d654141abc5e80e0f26bb2, type: 2}
     ButtonSprite: {fileID: 21300006, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
     Count: 1
-  - Piece: {fileID: 100000, guid: 6e41f51cde05cd44e857cbf2a9bce0ae, type: 2}
-    ButtonSprite: {fileID: 21300008, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
+  - Piece: {fileID: 100000, guid: fb8e89d0c6e9c94449a6e72666f1ec87, type: 2}
+    ButtonSprite: {fileID: 21300010, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
     Count: 1
   Background: {fileID: 0}
 --- !u!4 &1222319030
