@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 60: {fileID: 6000000}
   - 212: {fileID: 21200000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallTriangleFlipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}

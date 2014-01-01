@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LevelController.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUI\MenuButton.js">
     <Files>
       <File FileName="Assets\Camera\RightZoomCamera.js" Line="42" Column="1" />
       <File FileName="Assets\Camera\AutoAdjustCamera.js" Line="10" Column="37" />
-      <File FileName="Assets\LevelController.js" Line="16" Column="1" />
+      <File FileName="Assets\LevelController.js" Line="18" Column="1" />
       <File FileName="Assets\GUI\PieceMenuController.js" Line="40" Column="1" />
-      <File FileName="Assets\GUI\MenuButton.js" Line="26" Column="43" />
-      <File FileName="Assets\Pieces\PermanentBox.js" Line="6" Column="70" />
+      <File FileName="Assets\GUI\MenuButton.js" Line="12" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

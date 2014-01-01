@@ -23,14 +23,14 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -44,6 +44,78 @@ TextureImporter:
     textureFormat: -2
     compressionQuality: 50
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: static blocks_0
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 132
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 132
+        width: 80
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_2
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 89
+        width: 120
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_3
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 6
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_4
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 46
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 3
+        width: 80
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_6
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 46
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: static blocks_7
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 3
+        width: 80
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 

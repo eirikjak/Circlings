@@ -29,7 +29,8 @@ function FixedUpdate(){
 
 function IsNextToWall(){
 	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
-	return ray.collider != null;
+	
+	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static");;
 }
 
 function ShouldJump(){
@@ -60,7 +61,7 @@ function IsOnGround(){
 	
 	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x, this.transform.localPosition.y - radius),-Vector2.up,0.1,~(1<<this.gameObject.layer));
 	
-	return  ray.collider != null;
+	return  ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static");
 	
 }
 
