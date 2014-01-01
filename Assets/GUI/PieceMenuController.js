@@ -1,8 +1,10 @@
 ﻿#pragma strict
+
+public var Background:GameObject;
 public var PieceSeparation:float;
 public var Pieces:Button[];
-public var Background:GameObject;
 private var buttons:Array;
+
 class Button{
 	public var Piece:GameObject;
 	public var ButtonSprite:Sprite;
@@ -10,7 +12,7 @@ class Button{
 }
 
 function Start () {
-	
+
 	this.buttons = Array();
 	for(var i = 0; i<this.Pieces.length; i++){
 		var button = this.Pieces[i];
@@ -35,8 +37,7 @@ function Start () {
 		}
 	}
 	AlignButtons();
-	//this.Background.transform.localScale.x = 2*Camera.main.orthographicSize/this.Background.renderer.bounds.extents.x;
-	//this.Background.transform.localPosition.x += this.Background.renderer.bounds.extents.x;
+
 	
 }
 
@@ -50,11 +51,7 @@ function AlignButtons(){
 			button.transform.localPosition.x = left + this.PieceSeparation + button.renderer.bounds.extents.x;
 		}else{
 			button.transform.localPosition.x = button.renderer.bounds.extents.x;
-		}
-		
-			
-		
-		
+		}	
 	}
 }
 

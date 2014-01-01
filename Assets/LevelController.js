@@ -3,6 +3,7 @@ public var LevelContainer:GameObject;
 public var Menu:GameObject;
 private var menuHeight:float = 0.1;
 function Start () {
+	
 	var menuBound = ComputeBounds(Menu);
 	Menu.gameObject.transform.position = Vector3(0.1,menuBound.extents.y/2,0);
 	var bound = ComputeBounds(LevelContainer);

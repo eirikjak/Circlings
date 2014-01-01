@@ -10,24 +10,47 @@ function Update () {
 
 }
 
+function Selected(){
+	this.renderer.material.color.a = 0.5;
+}
+
+function UnSelected(){
+	this.renderer.material.color.a = 1.0;
+}
 
 function BeginDrag(){
-	Debug.Log("Begin");
 	this.draggingPiece = Instantiate(this.Piece);
 	(this.draggingPiece.renderer as SpriteRenderer).sprite = (this.renderer as SpriteRenderer).sprite;
-	this.renderer.material.color.a = 0.5;
+	Selected();
 
 }
 function OnDrag(x:float,y:float){
-	Debug.Log("x:" + x + " y:" + y);
 	this.draggingPiece.transform.position.x = x;
 	this.draggingPiece.transform.position.y = y;
 }
 
 function EndDrag(){
-	Debug.Log("End");
-	Owner.Placed(this.gameObject);
-	Destroy(this.gameObject);
+
+	if(!draggingPiece.renderer.bounds.Intersects(ComputeBounds(Owner.gameObject))){
+		Owner.Placed(this.gameObject);
+		Destroy(this.gameObject);
+	}else{
+		Destroy(draggingPiece);
+		UnSelected();
+		
+	}
+	
+}
+
+
+function ComputeBounds(root:GameObject){
+	var renderers = root.GetComponentsInChildren(Renderer);
+	var bound:Bounds = Bounds(root.transform.position,Vector3(1,1,1));
+	for(var renderer in renderers){
+		bound.Encapsulate((renderer as Renderer).bounds);	
+	}
+	return bound;
+	
 }
 
 #if UNITY_EDITOR

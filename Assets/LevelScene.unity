@@ -788,6 +788,7 @@ MonoBehaviour:
     ButtonSprite: {fileID: 21300010, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
     Count: 1
   Background: {fileID: 0}
+  GUICamera: {fileID: 269779558}
 --- !u!4 &1222319030
 Transform:
   m_ObjectHideFlags: 0
