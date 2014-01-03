@@ -1,13 +1,17 @@
 ﻿#pragma strict
+class MenuButton extends MonoBehaviour implements DragInputListener{
 public var Piece:GameObject;
 private var draggingPiece:GameObject;
 public var Owner:PieceMenuController;
 function Start () {
-
-}
+	this.gameObject.AddComponent(DragInput);
+	var input:DragInput = this.gameObject.AddComponent(DragInput);
+	input.AddDragListener(this);
+	
+}	
 
 function Update () {
-
+		
 }
 
 function Selected(){
@@ -20,13 +24,16 @@ function UnSelected(){
 
 function BeginDrag(){
 	this.draggingPiece = Instantiate(this.Piece);
+	var snap = this.draggingPiece.AddComponent(SnapToEdge);
+	this.gameObject.GetComponent(DragInput).AddDragListener(snap as DragInputListener);
+
+	this.draggingPiece.transform.position = this.transform.position;
 	(this.draggingPiece.renderer as SpriteRenderer).sprite = (this.renderer as SpriteRenderer).sprite;
 	Selected();
 
 }
-function OnDrag(x:float,y:float){
-	this.draggingPiece.transform.position.x = x;
-	this.draggingPiece.transform.position.y = y;
+function OnDrag(x:float,y:float){	
+
 }
 
 function EndDrag(){
@@ -52,19 +59,5 @@ function ComputeBounds(root:GameObject){
 	return bound;
 	
 }
-
-#if UNITY_EDITOR
-function OnMouseDown(){
-
-	BeginDrag();
+	
 }
-function OnMouseDrag(){
-	var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-	OnDrag(pos.x,pos.y);
-
-}
-function OnMouseUp(){
-	EndDrag();
-
-}
-#endif

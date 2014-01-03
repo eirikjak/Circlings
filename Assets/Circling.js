@@ -5,12 +5,20 @@ private var readyForJump:boolean;
 private var radius:float;
 public var JumpPower:float = 1.8;
 public var Speed:float = 70;
+public var DefaultSprite:Sprite;
+public var AngrySprite:Sprite;
+private var spriteRenderer:SpriteRenderer;
 private var isTouchingCircling:boolean;
 
+public var AngryTimer:float;
 
 function Start () {
+	this.spriteRenderer = this.renderer as SpriteRenderer;
+	var bounds = this.renderer.bounds;
+	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
+	radius = bounds.extents.x;
+	spriteRenderer.sprite = this.DefaultSprite;
 	
-	radius = (this.collider2D as CircleCollider2D).radius*this.transform.localScale.x;
 }
 
 function Update () {
@@ -41,18 +49,25 @@ function ShouldJump(){
 
 function OnCollisionEnter2D(col:Collision2D){
 	
-
-	if(col.gameObject.layer == this.gameObject.layer && this.transform.position.y > col.gameObject.transform.position.y){
-		this.isTouchingCircling = true;
+	if(col.gameObject.layer == this.gameObject.layer){
+		if(this.transform.position.y > col.gameObject.transform.position.y){
+			this.isTouchingCircling = true;
+			
+		}else{
+			this.spriteRenderer.sprite = this.AngrySprite;
 		
+		}
 	}
 	
 }
 
 
 function OnCollisionExit2D(col:Collision2D){
-	if(col.gameObject.layer == this.gameObject.layer)
+	if(col.gameObject.layer == this.gameObject.layer){
 		this.isTouchingCircling = false;
+		spriteRenderer.sprite = this.DefaultSprite;
+		
+	}
 }
 
 
