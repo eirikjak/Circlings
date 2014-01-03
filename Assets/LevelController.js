@@ -8,8 +8,8 @@ function Start () {
 	Menu.gameObject.transform.position = Vector3(0.1,menuBound.extents.y/2,0);
 	var bound = ComputeBounds(LevelContainer);
 	LevelContainer.transform.localPosition.x += bound.extents.x - bound.center.x;
-	LevelContainer.transform.localPosition.y += bound.extents.y + menuBound.extents.y- bound.center.y;
-
+	LevelContainer.transform.localPosition.y += bound.extents.y + bound.center.y;
+	
 	
 	
 }
