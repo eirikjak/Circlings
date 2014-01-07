@@ -67,8 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adab6cb81738824eb8b2a63ba17127e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpPower: 1.79999995
-  Speed: 30
+  JumpPower: 1.60000002
+  ReJumpDistance: .100000001
+  Speed: 60
+  MaxSpeed: 1.5
   DefaultSprite: {fileID: 21300000, guid: 205fea6c7af343247906cb9539fb37bb, type: 3}
   AngrySprite: {fileID: 21300002, guid: 205fea6c7af343247906cb9539fb37bb, type: 3}
   AngryTimer: 0
