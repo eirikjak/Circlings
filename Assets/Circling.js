@@ -16,6 +16,7 @@ private var jumpPosition:Vector2;
 private var stuck:boolean;
 
 public var AngryTimer:float;
+private var remainingAngryTime:float;
 
 function Start () {
 	this.jumpPosition = Vector2(-1000,-1000);
@@ -23,13 +24,20 @@ function Start () {
 	var bounds = this.renderer.bounds;
 	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
 	radius = bounds.extents.x;
+	Debug.Log("radius:" + radius);
 	spriteRenderer.sprite = this.DefaultSprite;
 	
 }
 
 function Update () {
 
-	
+	if(remainingAngryTime > 0){
+		remainingAngryTime -= Time.deltaTime;
+		if(remainingAngryTime <= 0){
+			spriteRenderer.sprite = this.DefaultSprite;
+			remainingAngryTime = 0;
+		}	
+	}
 }
 
 
@@ -39,7 +47,7 @@ function FixedUpdate(){
 		//if(!ShouldJump() && IsOnGround()){
 			rigidbody2D.AddForce(Vector2(Speed*Time.deltaTime,0));
 		//}
-		Debug.Log(this.rigidbody2D.velocity);
+		
 		this.rigidbody2D.velocity.x = Mathf.Clamp(this.rigidbody2D.velocity.x,0,this.MaxSpeed);
 		if(ShouldJump()){
 			Jump();
@@ -77,14 +85,13 @@ function ShouldJump(){
 
 
 function OnCollisionEnter2D(col:Collision2D){
-	Debug.Log("hello");
+
 	if(col.gameObject.layer == LayerMask.NameToLayer("Circling")){
-		if(this.transform.position.y > col.gameObject.transform.position.y || this.transform.position.x > col.gameObject.transform.position.x){
-			this.isTouchingCircling = true;
+		Debug.Log("hello:" + stuck);
+		if(this.transform.position.y + this.radius < col.gameObject.transform.position.y  && col.gameObject.rigidbody2D.velocity.y > 0){
+			spriteRenderer.sprite = this.AngrySprite;
+			remainingAngryTime = this.AngryTimer;
 			
-		}else{
-			this.spriteRenderer.sprite = this.AngrySprite;
-		
 		}
 	}
 	
@@ -92,11 +99,7 @@ function OnCollisionEnter2D(col:Collision2D){
 
 
 function OnCollisionExit2D(col:Collision2D){
-	if(col.gameObject.layer == this.gameObject.layer){
-		this.isTouchingCircling = false;
-		spriteRenderer.sprite = this.DefaultSprite;
-		
-	}
+	
 }
 
 
