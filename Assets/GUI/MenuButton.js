@@ -8,6 +8,7 @@ function Start () {
 	var input:DragInput = this.gameObject.AddComponent(DragInput);
 	input.AddDragListener(this);
 	
+	
 }	
 
 function Update () {
