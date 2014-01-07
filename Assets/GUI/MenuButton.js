@@ -4,7 +4,7 @@ public var Piece:GameObject;
 private var draggingPiece:GameObject;
 public var Owner:PieceMenuController;
 function Start () {
-	this.gameObject.AddComponent(DragInput);
+	
 	var input:DragInput = this.gameObject.AddComponent(DragInput);
 	input.AddDragListener(this);
 	

@@ -12,7 +12,16 @@ class Button{
 }
 
 function Start () {
-
+	
+	var backgroundObject = GameObject();
+	var backgroundRenderer:SpriteRenderer = backgroundObject.AddComponent(SpriteRenderer);
+	backgroundRenderer.sprite = this.Background;
+	backgroundObject.transform.parent = this.transform;
+	backgroundObject.transform.localPosition += backgroundRenderer.bounds.extents;
+	backgroundObject.transform.localScale.x = 2;
+	backgroundObject.layer = this.gameObject.layer;
+	var width = backgroundObject.renderer.bounds.extents.x*2;
+	
 	this.buttons = Array();
 	for(var i = 0; i<this.Pieces.length; i++){
 		var button = this.Pieces[i];
@@ -28,7 +37,7 @@ function Start () {
 			renderer.sprite = sprite;
 			gObject.transform.parent = this.transform;
 			gObject.transform.localPosition = Vector3(0,0,0);
-			gObject.transform.localPosition.y = gObject.renderer.bounds.extents.y/2;
+			gObject.transform.localPosition.y +=  backgroundObject.renderer.bounds.extents.y;
 			gObject.transform.localScale = Vector3(1,1,1);
 			gObject.layer = this.gameObject.layer;
 			var bounds = renderer.bounds;
@@ -39,14 +48,7 @@ function Start () {
 	}
 	AlignButtons();
 	
-	var backgroundObject = GameObject();
-	var backgroundRenderer:SpriteRenderer = backgroundObject.AddComponent(SpriteRenderer);
-	backgroundRenderer.sprite = this.Background;
-	backgroundObject.transform.parent = this.transform;
-	backgroundObject.transform.position += backgroundRenderer.bounds.extents;
-	backgroundObject.transform.localScale.x = 2;
-	backgroundObject.layer = this.gameObject.layer;
-	var width = backgroundObject.renderer.bounds.extents.x*2;
+	
 	
 	
 }

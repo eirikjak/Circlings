@@ -19,14 +19,16 @@ function Start () {
 	this.currentSize = this.camera.orthographicSize;
 	this.levelBounds = ComputeBounds(LevelContainer);
 	levelBottom = this.camera.WorldToScreenPoint(Vector3(0,this.levelBounds.center.y - this.levelBounds.extents.y,0)).y;
-	Debug.Log(levelBottom);
+
 	levelLeft = this.camera.WorldToScreenPoint(Vector3(this.levelBounds.center.x - this.levelBounds.extents.x,0,0)).x;
 
+	
 }
 
 
 function Update () {
-	
+	if(Input.GetMouseButton(0))
+		Debug.Log(this.camera.ScreenToWorldPoint(Input.mousePosition));
 	var zoomAmount = GetZoomAmount();
 	if(zoomAmount !=0 && this.currentSize + zoomAmount > this.MinSize  && this.currentSize + zoomAmount < this.MaxSize){
 		Zoom(zoomAmount);
@@ -40,7 +42,7 @@ function Update () {
 	var newLevelLeft = this.camera.WorldToScreenPoint(Vector3(this.levelBounds.center.x - this.levelBounds.extents.x,0,0)).x;
 	var screenHDiff = levelBottom - newLevelBottom;
 	var screenWDiff = levelLeft - newLevelLeft;
-	Debug.Log(newLevelBottom);
+
 	this.transform.position.y -= (this.camera.orthographicSize*2)*(screenHDiff/Screen.height);
 	this.transform.position.x -= (this.camera.orthographicSize*2*this.camera.aspect)*(screenWDiff/Screen.width);
 	
@@ -64,7 +66,7 @@ function GetZoomAmount(){
 
 function ComputeBounds(root:GameObject){
 	var renderers = root.GetComponentsInChildren(Renderer);
-	var bound:Bounds = Bounds(root.transform.position,Vector3(1,1,1));
+	var bound:Bounds = Bounds(root.transform.position,Vector3(0,0,0));
 	for(var renderer in renderers){
 		bound.Encapsulate((renderer as Renderer).bounds);	
 	}
