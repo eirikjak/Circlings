@@ -17,7 +17,7 @@ class SnapToEdge extends MonoBehaviour implements DragInputListener{
 		
 	}
 	function OnDestroy(){
-		Debug.Log("destroy");
+
 		var input = this.gameObject.GetComponent(DragInput);
 		input.RemoveDragListener(this);
 	

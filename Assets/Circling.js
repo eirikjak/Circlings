@@ -4,15 +4,18 @@
 private var readyForJump:boolean;
 private var radius:float;
 public var JumpPower:float = 1.8;
+public var ReJumpDistance:float = 0.1;
 public var Speed:float = 70;
 public var DefaultSprite:Sprite;
 public var AngrySprite:Sprite;
 private var spriteRenderer:SpriteRenderer;
 private var isTouchingCircling:boolean;
 
+private var jumpPosition:Vector2;
 public var AngryTimer:float;
 
 function Start () {
+	this.jumpPosition = this.transform.position;
 	this.spriteRenderer = this.renderer as SpriteRenderer;
 	var bounds = this.renderer.bounds;
 	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
@@ -43,14 +46,14 @@ function IsNextToWall(){
 
 function ShouldJump(){
 	
-	return IsNextToWall() && (IsOnGround() || this.isTouchingCircling);
+	return IsNextToWall() && IsOnGround() || this.isTouchingCircling;
 }
 
 
 function OnCollisionEnter2D(col:Collision2D){
 	
 	if(col.gameObject.layer == this.gameObject.layer){
-		if(this.transform.position.y > col.gameObject.transform.position.y){
+		if(this.transform.position.y > col.gameObject.transform.position.y || this.transform.position.x > col.gameObject.transform.position.x){
 			this.isTouchingCircling = true;
 			
 		}else{
@@ -82,10 +85,11 @@ function IsOnGround(){
 
 function Jump(){
 	
-	this.rigidbody2D.velocity.y = 0;
-	this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.deltaTime));
+	if(Vector2.Distance(this.jumpPosition,this.transform.position) > this.ReJumpDistance){
+		this.jumpPosition = this.transform.position;
+		this.rigidbody2D.velocity.y = 0;
+		this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.deltaTime));
+	}
 		
-	
-	
 
 }
