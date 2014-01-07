@@ -27,8 +27,7 @@ function Start () {
 
 
 function Update () {
-	if(Input.GetMouseButton(0))
-		Debug.Log(this.camera.ScreenToWorldPoint(Input.mousePosition));
+
 	var zoomAmount = GetZoomAmount();
 	if(zoomAmount !=0 && this.currentSize + zoomAmount > this.MinSize  && this.currentSize + zoomAmount < this.MaxSize){
 		Zoom(zoomAmount);

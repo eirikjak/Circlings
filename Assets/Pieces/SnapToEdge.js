@@ -5,7 +5,10 @@ class SnapToEdge extends MonoBehaviour implements DragInputListener{
 	public var Distance:float = 0.1;
 	private var origionalLayer:int;
 	function Start () {
-		var input = this.gameObject.AddComponent(DragInput);
+		var input = this.gameObject.GetComponent(DragInput);
+		if(!input)
+			input = this.gameObject.AddComponent(DragInput);
+		
 		input.AddDragListener(this);
 		this.origionalLayer = this.gameObject.layer;
 	}
@@ -13,7 +16,12 @@ class SnapToEdge extends MonoBehaviour implements DragInputListener{
 	function Update () {
 		
 	}
+	function OnDestroy(){
+		Debug.Log("destroy");
+		var input = this.gameObject.GetComponent(DragInput);
+		input.RemoveDragListener(this);
 	
+	}
 
 	function BeginDrag(){
 	}

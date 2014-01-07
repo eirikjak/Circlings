@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 
 interface DragInputListener{
@@ -26,6 +26,17 @@ class DragInput extends MonoBehaviour{
 		this.listeners.push(listener);
 		if(dragging)
 			listener.BeginDrag();
+	}
+	
+	public function RemoveDragListener(listener:DragInputListener){
+		this.listeners.Remove(listener);
+	}
+	
+	function OnDestroy(){
+		if(dragging){
+			for(var listener:DragInputListener in this.listeners)
+				listener.EndDrag();
+		}
 	}
 	
 	#if UNITY_EDITOR
