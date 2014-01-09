@@ -76,7 +76,7 @@ function IsNextToWall(){
 	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.05, Color.blue);
 		
 	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
-			|| sweepRay.collider != null && sweepRay.collider.gameObject.layer == LayerMask.NameToLayer("Static");;
+			|| (sweepRay.collider != null && sweepRay.collider.gameObject.layer == LayerMask.NameToLayer("Static"));;
 }
 
 function ShouldJump(){
@@ -108,7 +108,13 @@ function IsOnGround(){
 	if(this.rigidbody2D.velocity.y > 0)
 		return false;
 	var ray = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y - radius),-Vector2.up,0.01,~(1<<this.gameObject.layer));
-	return  ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static");
+	Debug.DrawRay(Vector2(transform.position.x, this.transform.position.y - radius),-Vector2.up*0.01,Color.white);
+	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/4), Mathf.Sin(-2*Mathf.PI/4));
+	var cornerRay = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.05,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.05, Color.blue);
+	return  ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
+			|| (cornerRay.collider != null && cornerRay.collider.gameObject.layer == LayerMask.NameToLayer("Static"));
+			
 	
 }
 
