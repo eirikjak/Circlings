@@ -88,7 +88,6 @@ function ShouldJump(){
 function OnCollisionEnter2D(col:Collision2D){
 
 	if(col.gameObject.layer == LayerMask.NameToLayer("Circling")){
-		Debug.Log("hello:" + stuck);
 		if(this.transform.position.y + this.radius < col.gameObject.transform.position.y  && col.gameObject.rigidbody2D.velocity.y > 0){
 			spriteRenderer.sprite = this.AngrySprite;
 			remainingAngryTime = this.AngryTimer;

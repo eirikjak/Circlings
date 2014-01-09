@@ -6,12 +6,15 @@ public var StartInterval:float;
 private var pile:Array;
 private var launching:boolean;
 private var launchTimer:float;
+private var started:boolean;
+private var launchedCircling:Circling;
 function Start () {
 	BuildPile();
 }
 
 function Update () {
-	if(launching){
+	//Dont start the timer untill the circle leaves the collider
+	if(launching && !this.collider2D.OverlapPoint(launchedCircling.transform.position)){
 		launchTimer += Time.deltaTime;
 		if(launchTimer >= StartInterval){
 			LaunchCirclings();
@@ -60,9 +63,9 @@ function GetPileWidth(count:int){
 
 
 function LaunchCirclings(){
-	this.gameObject.Destroy(this.GetComponent(BoxCollider2D));
 	if(pile.length > 0){
 		var circling = pile.Pop() as Circling;
+		launchedCircling = circling;
 		circling.rigidbody2D.isKinematic = false;
 		if(pile.length >= GetPileWidth(this.Ammunition)){
 			circling.JumpPower /= 2;
@@ -78,6 +81,13 @@ function LaunchCirclings(){
 	}
 }
 
+function BeginLaunch(){
+	if(!started){
+		started = true;
+		LaunchCirclings();
+	}
+
+}
 #if UNITY_EDITOR
 private var down:boolean;
 function OnMouseDown(){
@@ -85,7 +95,7 @@ function OnMouseDown(){
 }
 function OnMouseUp(){
 	if(down){
-		LaunchCirclings();
+		BeginLaunch();
 	}
 	down = false;
 	
