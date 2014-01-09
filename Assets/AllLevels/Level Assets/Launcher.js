@@ -2,10 +2,24 @@
 
 public var CirclingPrefab:Circling;
 public var Ammunition:int;
-
+public var StartInterval:float;
 private var pile:Array;
+private var launching:boolean;
+private var launchTimer:float;
 function Start () {
 	BuildPile();
+}
+
+function Update () {
+	if(launching){
+		launchTimer += Time.deltaTime;
+		if(launchTimer >= StartInterval){
+			LaunchCirclings();
+			launchTimer = 0;
+		
+		}
+	
+	}
 }
 
 function BuildPile(){
@@ -44,19 +58,24 @@ function GetPileWidth(count:int){
 }
 
 
-function Update () {
 
-}
-
-function LaunchCircling(){
-	
-	var circling = pile.Pop() as Circling;
-	circling.rigidbody2D.isKinematic = false;
-	if(pile.length >= GetPileWidth(this.Ammunition)){
-		circling.JumpPower /= 2;
-		circling.Jump();
-		circling.JumpPower *= 2;
-	}	
+function LaunchCirclings(){
+	this.gameObject.Destroy(this.GetComponent(BoxCollider2D));
+	if(pile.length > 0){
+		var circling = pile.Pop() as Circling;
+		circling.rigidbody2D.isKinematic = false;
+		if(pile.length >= GetPileWidth(this.Ammunition)){
+			circling.JumpPower /= 2;
+			circling.Jump();
+			circling.JumpPower *= 2;
+		}
+		if(pile.length == 0){
+			launching = false;
+		}else{
+			launching = true;
+		
+		}
+	}
 }
 
 #if UNITY_EDITOR
@@ -66,7 +85,7 @@ function OnMouseDown(){
 }
 function OnMouseUp(){
 	if(down){
-		LaunchCircling();
+		LaunchCirclings();
 	}
 	down = false;
 	
