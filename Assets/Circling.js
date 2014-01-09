@@ -18,8 +18,11 @@ private var stuck:boolean;
 public var AngryTimer:float;
 private var remainingAngryTime:float;
 
+private var positionCheckIntervall:float = 0.1;
+private var lastPositionCheck:Vector2;
 function Start () {
-	this.jumpPosition = Vector2(-1000,-1000);
+	jumpPosition = Vector2(-1000,-1000);
+	lastPositionCheck = Vector2(-1000,-1000);
 	this.spriteRenderer = this.renderer as SpriteRenderer;
 	var bounds = this.renderer.bounds;
 	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
@@ -27,6 +30,11 @@ function Start () {
 
 	spriteRenderer.sprite = this.DefaultSprite;
 	
+}
+
+function CheckPositionStuck(){
+	
+
 }
 
 function Update () {
@@ -70,13 +78,19 @@ function IsStuck(){
 }
 function IsNextToWall(){
 	var ray = Physics2D.Raycast(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right*0.1, Color.red);
-	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/8), Mathf.Sin(-Mathf.PI/8));
-	var sweepRay = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.05,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.05, Color.blue);
-		
+	Debug.DrawRay(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right*0.01, Color.red);
+	
+	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/4), Mathf.Sin(-Mathf.PI/4));
+	var sweepRayLow = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.03,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.03, Color.blue);
+	
+	var directionTop:Vector2 = Vector2(direction.x,-direction.y);
+	var sweepRayHigh = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop,0.03,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop*0.03, Color.blue);
+	
 	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
-			|| (sweepRay.collider != null && sweepRay.collider.gameObject.layer == LayerMask.NameToLayer("Static"));;
+			|| (sweepRayLow.collider != null && sweepRayLow.collider.gameObject.layer == LayerMask.NameToLayer("Static"))
+			|| (sweepRayHigh.collider != null && sweepRayHigh.collider.gameObject.layer == LayerMask.NameToLayer("Static"));;
 }
 
 function ShouldJump(){
