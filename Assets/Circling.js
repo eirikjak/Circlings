@@ -44,17 +44,13 @@ function Update () {
 
 function FixedUpdate(){
 	if(!stuck){
-		//if(!ShouldJump() && IsOnGround()){
-			rigidbody2D.AddForce(Vector2(Speed*Time.deltaTime,0));
-		//}
-		
+		rigidbody2D.AddForce(Vector2(Speed*Time.deltaTime,0));
 		this.rigidbody2D.velocity.x = Mathf.Clamp(this.rigidbody2D.velocity.x,0,this.MaxSpeed);
+		
 		if(ShouldJump()){
 			Jump();
 		}else{
 			if(IsStuck()){
-				Debug.Log("stuck");
-				//Destroy(this.rigidbody2D);
 				this.gameObject.layer = LayerMask.NameToLayer("Static");
 				this.gameObject.rigidbody2D.isKinematic = true;
 				stuck = true;
@@ -74,8 +70,13 @@ function IsStuck(){
 }
 function IsNextToWall(){
 	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
-	
-	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static");;
+	Debug.DrawRay(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right*0.1, Color.red);
+	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/8), Mathf.Sin(-Mathf.PI/8));
+	var sweepRay = Physics2D.Raycast(Vector2(this.transform.localPosition.x, this.transform.localPosition.y) + direction*radius,direction,0.05,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.localPosition.x, this.transform.localPosition.y) + direction*radius,direction*0.05, Color.blue);
+		
+	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
+			|| sweepRay.collider != null && sweepRay.collider.gameObject.layer == LayerMask.NameToLayer("Static");;
 }
 
 function ShouldJump(){
