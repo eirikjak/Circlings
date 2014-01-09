@@ -24,7 +24,7 @@ function Start () {
 	var bounds = this.renderer.bounds;
 	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
 	radius = bounds.extents.x;
-	Debug.Log("radius:" + radius);
+
 	spriteRenderer.sprite = this.DefaultSprite;
 	
 }
@@ -69,11 +69,11 @@ function IsStuck(){
 	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance);
 }
 function IsNextToWall(){
-	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.localPosition.x + radius, this.transform.localPosition.y),Vector2.right*0.1, Color.red);
+	var ray = Physics2D.Raycast(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right*0.1, Color.red);
 	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/8), Mathf.Sin(-Mathf.PI/8));
-	var sweepRay = Physics2D.Raycast(Vector2(this.transform.localPosition.x, this.transform.localPosition.y) + direction*radius,direction,0.05,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.localPosition.x, this.transform.localPosition.y) + direction*radius,direction*0.05, Color.blue);
+	var sweepRay = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.05,~(1<<this.gameObject.layer));
+	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.05, Color.blue);
 		
 	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
 			|| sweepRay.collider != null && sweepRay.collider.gameObject.layer == LayerMask.NameToLayer("Static");;
@@ -108,8 +108,7 @@ function OnCollisionExit2D(col:Collision2D){
 function IsOnGround(){
 	if(this.rigidbody2D.velocity.y > 0)
 		return false;
-	var ray = Physics2D.Raycast(Vector2(this.transform.localPosition.x, this.transform.localPosition.y - radius),-Vector2.up,0.01,~(1<<this.gameObject.layer));
-	
+	var ray = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y - radius),-Vector2.up,0.01,~(1<<this.gameObject.layer));
 	return  ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static");
 	
 }

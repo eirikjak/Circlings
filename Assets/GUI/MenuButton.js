@@ -39,7 +39,7 @@ function OnDrag(x:float,y:float){
 
 function EndDrag(){
 	this.gameObject.GetComponent(DragInput).RemoveDragListener(this.draggingPiece.GetComponent(SnapToEdge) as DragInputListener);
-	if(!draggingPiece.renderer.bounds.Intersects(ComputeBounds(Owner.gameObject))){
+	if(!draggingPiece.renderer.bounds.Intersects(Util.ComputeBounds(Owner.gameObject))){
 		Owner.Placed(this.gameObject);
 		Destroy(this.gameObject);
 	}else{
@@ -51,14 +51,6 @@ function EndDrag(){
 }
 
 
-function ComputeBounds(root:GameObject){
-	var renderers = root.GetComponentsInChildren(Renderer);
-	var bound:Bounds = Bounds(root.transform.position,Vector3(1,1,1));
-	for(var renderer in renderers){
-		bound.Encapsulate((renderer as Renderer).bounds);	
-	}
-	return bound;
-	
-}
+
 	
 }
