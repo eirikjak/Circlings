@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CirclingPrefab: {fileID: 11400000, guid: 12a6407b44ffa564588b659bfefb6d2e, type: 2}
-  Ammunition: 11
+  Ammunition: 1
   StartInterval: .300000012
 --- !u!1 &1658975914
 GameObject:
@@ -799,7 +799,7 @@ Transform:
   m_PrefabInternal: {fileID: 1775697086}
   m_GameObject: {fileID: 1658975914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.819596648, y: 0, z: 1}
+  m_LocalPosition: {x: -.809185982, y: .00520536909, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515408194}
@@ -856,7 +856,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: Ammunition
-      value: 11
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: PileWidth
@@ -877,6 +877,14 @@ Prefab:
     - target: {fileID: 11400004, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: StartInterval
       value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 400020, guid: 27ab2ac0685808243b590527b3489571, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.809185982
+      objectReference: {fileID: 0}
+    - target: {fileID: 400020, guid: 27ab2ac0685808243b590527b3489571, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .00520536909
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2300000, guid: 27ab2ac0685808243b590527b3489571, type: 2}
