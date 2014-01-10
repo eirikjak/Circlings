@@ -50,7 +50,7 @@ function BuildPile(){
 
 	var collider = this.gameObject.AddComponent(BoxCollider2D) as BoxCollider2D;
 
-	collider.size = Vector2(2*radius*pileWidth,(pile[pile.length -1] as Circling).transform.position.y - radius);
+	collider.size = Vector2(2*radius*pileWidth,(pile[pile.length -1] as Circling).transform.position.y - (pile[0] as Circling).transform.position.y  + 2*radius);
 	collider.center = collider.size/2;
 
 }
