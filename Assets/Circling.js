@@ -152,7 +152,7 @@ function Jump(){
 		this.jumpPosition = this.transform.position;
 		this.rigidbody2D.velocity.y = 0;
 		this.rigidbody2D.velocity.x = 0;
-		this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.deltaTime));
+		this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.fixedDeltaTime));
 		this.rigidbody2D.angularVelocity = 0;
 		
 
