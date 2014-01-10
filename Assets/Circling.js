@@ -8,6 +8,7 @@ public var ReJumpDistance:float = 0.1;
 public var Speed:float = 70;
 public var MaxSpeed:float =1.5;
 public var DefaultSprite:Sprite;
+public var ScaredSprite:Sprite;
 public var AngrySprite:Sprite;
 private var spriteRenderer:SpriteRenderer;
 private var isTouchingCircling:boolean;
@@ -20,6 +21,7 @@ private var remainingAngryTime:float;
 
 private var positionCheckIntervall:float = 0.1;
 private var lastPositionCheck:Vector2;
+private var falling:boolean;
 function Start () {
 	jumpPosition = Vector2(-1000,-1000);
 	lastPositionCheck = Vector2(-1000,-1000);
@@ -45,6 +47,16 @@ function Update () {
 			spriteRenderer.sprite = this.DefaultSprite;
 			remainingAngryTime = 0;
 		}	
+	}
+	
+	if(this.rigidbody2D.velocity.y <= -2){
+		if(!falling)
+			spriteRenderer.sprite = this.ScaredSprite;
+		falling = true;
+	}else{
+		if(falling)
+			spriteRenderer.sprite = this.DefaultSprite;
+		falling = false;
 	}
 }
 
