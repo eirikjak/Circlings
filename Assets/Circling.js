@@ -77,6 +77,8 @@ function IsStuck(){
 	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance);
 }
 function IsNextToWall(){
+	if(this.rigidbody2D.velocity.x == 0)
+		return true;
 	var ray = Physics2D.Raycast(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
 	Debug.DrawRay(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right*0.01, Color.red);
 	
