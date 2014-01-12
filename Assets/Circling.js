@@ -64,9 +64,10 @@ function Update () {
 
 function FixedUpdate(){
 	if(!stuck){
-		rigidbody2D.AddForce(Vector2(Speed*Time.deltaTime,0));
-		this.rigidbody2D.velocity.x = Mathf.Clamp(this.rigidbody2D.velocity.x,0,this.MaxSpeed);
-		
+		if (this.rigidbody2D.velocity.x < this.MaxSpeed) {
+			rigidbody2D.AddForce(Vector2(Speed*Time.deltaTime,0));
+	//		this.rigidbody2D.velocity.x = Mathf.Clamp(this.rigidbody2D.velocity.x,0,this.MaxSpeed);
+		}
 		if(ShouldJump()){
 			Jump();
 		}else{
@@ -149,7 +150,7 @@ function IsOnGround(){
 
 function Jump(){
 	//Debug.Log(Vector2.Distance(this.jumpPosition,this.transform.position));
-		Debug.Log("Jump");
+	//	Debug.Log("Jump");
 		this.jumpPosition = this.transform.position;
 		this.rigidbody2D.velocity.y = 0;
 		this.rigidbody2D.velocity.x = 0;
