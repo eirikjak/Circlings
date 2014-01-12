@@ -103,10 +103,10 @@ function IsNextToWall(){
 	var directionTop:Vector2 = Vector2(direction.x,-direction.y);
 	var sweepRayHigh = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop,0.03,~(1<<this.gameObject.layer));
 	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop*0.03, Color.blue);
-	
+
 	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
-			|| (sweepRayLow.collider != null && sweepRayLow.collider.gameObject.layer == LayerMask.NameToLayer("Static"))
-			|| (sweepRayHigh.collider != null && sweepRayHigh.collider.gameObject.layer == LayerMask.NameToLayer("Static"));;
+			|| (sweepRayLow.collider != null && sweepRayLow.collider.gameObject.layer == LayerMask.NameToLayer("Static") && !sweepRayLow.collider.gameObject.tag=="NoJump") 
+			|| (sweepRayHigh.collider != null && sweepRayHigh.collider.gameObject.layer == LayerMask.NameToLayer("Static") && !sweepRayHigh.collider.gameObject.tag=="NoJump");;
 }
 
 function ShouldJump(){
