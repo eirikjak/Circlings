@@ -71,6 +71,7 @@ function FixedUpdate(){
 			Jump();
 		}else{
 			if(IsStuck()){
+				LevelState.LiveCirclings--;
 				this.gameObject.layer = LayerMask.NameToLayer("Static");
 				this.gameObject.rigidbody2D.isKinematic = true;
 				stuck = true;
@@ -86,7 +87,7 @@ function IsInCorner(){
 }
 
 function IsStuck(){
-	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance);
+	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance) && this.transform.position.y < -1;
 }
 function IsNextToWall(){
 	if(this.rigidbody2D.velocity.x == 0)

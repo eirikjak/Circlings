@@ -9,8 +9,10 @@ function Update () {
 }
 
 function OnTriggerEnter2D(other:Collider2D){
-
-	Debug.Log(other.gameObject.tag);
+	if (other.gameObject.tag=="Circling") {
+		LevelState.CirclingsInGoal+=1;
+		LevelState.LiveCirclings--;
+	}
 
 }
 

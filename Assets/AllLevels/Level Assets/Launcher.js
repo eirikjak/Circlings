@@ -9,6 +9,7 @@ private var launchTimer:float;
 private var started:boolean;
 private var launchedCircling:Circling;
 function Start () {
+	LevelState.LiveCirclings=this.Ammunition;
 	BuildPile();
 }
 
