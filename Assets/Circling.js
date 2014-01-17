@@ -19,9 +19,23 @@ private var stuck:boolean;
 public var AngryTimer:float;
 private var remainingAngryTime:float;
 
+public var JumpTimer:float;
+private var remainingJumpCooldown:float;
+
 private var positionCheckIntervall:float = 0.1;
 private var lastPositionCheck:Vector2;
 private var falling:boolean;
+private var collidingCirclings:Hashtable;
+private var collidingStatic:Hashtable;
+
+class Pair{
+	public var First:Object;
+	public var Second:Object;
+	public function  Pair(obj1:Object, obj2:Object){
+		this.First = obj1;
+		this.Second = obj2;
+	}
+}
 function Start () {
 	jumpPosition = Vector2(-1000,-1000);
 	lastPositionCheck = Vector2(-1000,-1000);
@@ -29,7 +43,8 @@ function Start () {
 	var bounds = this.renderer.bounds;
 	(this.collider2D as CircleCollider2D).radius = bounds.extents.x;
 	radius = bounds.extents.x;
-
+	collidingCirclings = Hashtable();
+	collidingStatic = Hashtable();
 	spriteRenderer.sprite = this.DefaultSprite;
 	
 }
@@ -47,6 +62,13 @@ function Update () {
 			spriteRenderer.sprite = this.DefaultSprite;
 			remainingAngryTime = 0;
 		}	
+	}
+	
+	if(remainingJumpCooldown > 0){
+		remainingJumpCooldown -= Time.deltaTime;
+		if(remainingJumpCooldown <= 0){
+			remainingJumpCooldown = 0;
+		}
 	}
 	
 	if(this.rigidbody2D.velocity.y <= -2){
@@ -71,6 +93,7 @@ function FixedUpdate(){
 		if(ShouldJump()){
 			Jump();
 		}else{
+	
 			if(IsStuck()){
 				LevelState.LiveCirclings--;
 				this.gameObject.layer = LayerMask.NameToLayer("Static");
@@ -83,30 +106,9 @@ function FixedUpdate(){
 }
 
 function IsInCorner(){
-	return IsNextToWall() && IsOnGround();
-
-}
-
-function IsStuck(){
-	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance) && this.transform.position.y < -1;
-}
-function IsNextToWall(){
-	if(this.rigidbody2D.velocity.x == 0)
-		return true;
-	var ray = Physics2D.Raycast(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right,0.01,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x + radius, this.transform.position.y),Vector2.right*0.01, Color.red);
 	
-	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/4), Mathf.Sin(-Mathf.PI/4));
-	var sweepRayLow = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.03,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.03, Color.blue);
-	
-	var directionTop:Vector2 = Vector2(direction.x,-direction.y);
-	var sweepRayHigh = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop,0.03,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + directionTop*radius,directionTop*0.03, Color.blue);
+	return IsNextToWall() && (IsOnGround() || IsOnTopOfCircling());
 
-	return ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
-			|| (sweepRayLow.collider != null && sweepRayLow.collider.gameObject.layer == LayerMask.NameToLayer("Static") && !sweepRayLow.collider.gameObject.tag=="NoJump") 
-			|| (sweepRayHigh.collider != null && sweepRayHigh.collider.gameObject.layer == LayerMask.NameToLayer("Static") && !sweepRayHigh.collider.gameObject.tag=="NoJump");;
 }
 
 function ShouldJump(){
@@ -115,47 +117,122 @@ function ShouldJump(){
 }
 
 
+
+function IsStuck(){
+
+	return IsInCorner() && (Vector2.Distance(this.jumpPosition,this.transform.position) <= this.ReJumpDistance) || this.transform.position.y < -1;
+}
+
+
+
+
 function OnCollisionEnter2D(col:Collision2D){
 
 	if(col.gameObject.layer == LayerMask.NameToLayer("Circling")){
-		if(this.transform.position.y + this.radius < col.gameObject.transform.position.y  && col.gameObject.rigidbody2D.velocity.y > 0){
-			spriteRenderer.sprite = this.AngrySprite;
-			remainingAngryTime = this.AngryTimer;
-			
-		}
+		collidingCirclings[col.gameObject] = Pair(col, this.transform.position);
+		
+	}
+	else if(col.gameObject.layer == LayerMask.NameToLayer("Static") && col.gameObject.tag != "NoJump"){
+		collidingStatic[col.gameObject] = Pair(col, this.transform.position);
+		Debug.Log("hello");
+		
 	}
 	
 }
 
-
 function OnCollisionExit2D(col:Collision2D){
+	if(col.gameObject.layer == LayerMask.NameToLayer("Circling")){
+		if(CirclingOnTop() && col.gameObject.rigidbody2D.velocity.y > 0){
+			spriteRenderer.sprite = this.AngrySprite;
+			remainingAngryTime = this.AngryTimer;
+		}
+		collidingCirclings.Remove(col.gameObject);
+		
+	}else if(col.gameObject.layer == LayerMask.NameToLayer("Static") && col.gameObject.tag != "NoJump"){
+		
+		collidingStatic.Remove(col.gameObject);
+	}
 	
 }
 
+function CirclingOnTop(){
+		for(var pair:Pair  in collidingCirclings.Values){
+			var col:Collision2D = pair.First as Collision2D;
+			var oldPos:Vector3 = pair.Second;
+			var diff:Vector3 = this.transform.position - oldPos;
+			for(var contact:ContactPoint2D in col.contacts){
+				var point = contact.point + diff;
+				if(point.y > this.transform.position.y)
+					return true;
+			}	
+	}
+	return false;
+}
+
+function IsOnTopOfCircling(){
+	for(var pair:Pair  in collidingCirclings.Values){
+		var col:Collision2D = pair.First as Collision2D;
+		var oldPos:Vector3 = pair.Second;
+		var diff:Vector3 = this.transform.position - oldPos;
+		for(var contact:ContactPoint2D in col.contacts){
+			var point = contact.point + diff;
+			if(point.y < this.transform.position.y)
+				return true;
+		}	
+	}
+	return false;
+}
+
+function IsNextToWall(){
+	for(var pair:Pair in collidingStatic.Values){
+		var col:Collision2D = pair.First as Collision2D;
+		var oldPos:Vector3 = pair.Second;
+		var diff:Vector3 = this.transform.position - oldPos;
+		for(var contact:ContactPoint2D in col.contacts){
+			var point = contact.point + diff;
+			
+			if(point.x > this.transform.position.x && point.y > this.transform.position.y - radius*0.75){
+				Debug.Log("Wall");
+				return true;
+				
+			}
+		}	
+		
+	}
+	return false;
+
+}
 
 
 function IsOnGround(){
-	if(this.rigidbody2D.velocity.y > 0)
-		return false;
-	var ray = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y - radius),-Vector2.up,0.01,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(transform.position.x, this.transform.position.y - radius),-Vector2.up*0.01,Color.white);
-	var direction:Vector2 = Vector2(Mathf.Cos(-Mathf.PI/4), Mathf.Sin(-2*Mathf.PI/4));
-	var cornerRay = Physics2D.Raycast(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction,0.01,~(1<<this.gameObject.layer));
-	Debug.DrawRay(Vector2(this.transform.position.x, this.transform.position.y) + direction*radius,direction*0.01, Color.blue);
-	return  ray.collider != null && ray.collider.gameObject.layer == LayerMask.NameToLayer("Static")
-			|| (cornerRay.collider != null && cornerRay.collider.gameObject.layer == LayerMask.NameToLayer("Static"));
-			
+
 	
+	for(var pair:Pair in collidingStatic.Values){
+		var col:Collision2D = pair.First as Collision2D;
+		var oldPos:Vector3 = pair.Second;
+		var diff:Vector3 = this.transform.position - oldPos;
+		for(var contact:ContactPoint2D in col.contacts){
+			var point = contact.point + diff;
+			if(point.y + radius*0.5 <= this.transform.position.y){
+				Debug.Log("Ground");
+				return true;
+				}
+		}	
+		
+	}
+	return false;	
 }
 
 function Jump(){
-	//Debug.Log(Vector2.Distance(this.jumpPosition,this.transform.position));
-	//	Debug.Log("Jump");
+	if(remainingJumpCooldown == 0){
+		Debug.Log("Jump");
 		this.jumpPosition = this.transform.position;
 		this.rigidbody2D.velocity.y = 0;
 		this.rigidbody2D.velocity.x = 0;
 		this.rigidbody2D.AddForce(Vector2(0.0,JumpPower/Time.fixedDeltaTime));
 		this.rigidbody2D.angularVelocity = 0;
+		remainingJumpCooldown = this.JumpTimer;
+	}
 		
 
 }

@@ -113,10 +113,10 @@ MonoBehaviour:
     Count: 2
   - Piece: {fileID: 100000, guid: 77f7af4707d654141abc5e80e0f26bb2, type: 2}
     ButtonSprite: {fileID: 21300006, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
-    Count: 1
+    Count: 2
   - Piece: {fileID: 100000, guid: fb8e89d0c6e9c94449a6e72666f1ec87, type: 2}
     ButtonSprite: {fileID: 21300010, guid: 4db9571fc07d15042911a1de8c2e2c77, type: 3}
-    Count: 1
+    Count: 2
 --- !u!4 &255494106
 Transform:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 1775697086}
   m_GameObject: {fileID: 643179092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .326855183, y: .0715740323, z: 1}
+  m_LocalPosition: {x: -.369138956, y: .385341763, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515408194}
@@ -515,7 +515,7 @@ Transform:
   m_PrefabInternal: {fileID: 1775697086}
   m_GameObject: {fileID: 1174965956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92704201, y: 1.40478456, z: 1}
+  m_LocalPosition: {x: -.358202994, y: .788658738, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515408194}
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CirclingPrefab: {fileID: 11400000, guid: 12a6407b44ffa564588b659bfefb6d2e, type: 2}
-  Ammunition: 10
+  Ammunition: 3
   StartInterval: .300000012
 --- !u!1 &1658975914
 GameObject:
@@ -840,23 +840,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .0715740323
+      value: .385341763
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .326855183
+      value: -.369138956
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.92704201
+      value: -.358202994
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.40478456
+      value: .788658738
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: Ammunition
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: PileWidth
@@ -893,6 +893,14 @@ Prefab:
     - target: {fileID: 400002, guid: 27ab2ac0685808243b590527b3489571, type: 2}
       propertyPath: m_LocalPosition.y
       value: .396083266
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 27ab2ac0685808243b590527b3489571, type: 2}
+      propertyPath: Pieces.Array.data[2].Count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 27ab2ac0685808243b590527b3489571, type: 2}
+      propertyPath: Pieces.Array.data[3].Count
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2300000, guid: 27ab2ac0685808243b590527b3489571, type: 2}
