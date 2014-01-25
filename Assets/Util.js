@@ -10,3 +10,12 @@ public static function ComputeBounds(root:GameObject){
 	return bound;
 	
 }
+
+class Pair{
+	public var First:Object;
+	public var Second:Object;
+	public function  Pair(obj1:Object, obj2:Object){
+		this.First = obj1;
+		this.Second = obj2;
+	}
+}

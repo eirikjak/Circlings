@@ -28,14 +28,7 @@ private var falling:boolean;
 private var collidingCirclings:Hashtable;
 private var collidingStatic:Hashtable;
 
-class Pair{
-	public var First:Object;
-	public var Second:Object;
-	public function  Pair(obj1:Object, obj2:Object){
-		this.First = obj1;
-		this.Second = obj2;
-	}
-}
+
 function Start () {
 	jumpPosition = Vector2(-1000,-1000);
 	lastPositionCheck = Vector2(-1000,-1000);

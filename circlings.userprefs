@@ -1,16 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pieces\SnapToEdge.js">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Circling.js">
     <Files>
-      <File FileName="Assets\Circling.js" Line="217" Column="25" />
-      <File FileName="Circlings.sln" Line="1" Column="1" />
-      <File FileName="Assets\Circling.js" Line="238" Column="2" />
-      <File FileName="Assets\AllLevels\Level Assets\Launcher.js" Line="1" Column="1" />
-      <File FileName="Assets\LevelController.js" Line="1" Column="1" />
-      <File FileName="Assets\Util.js" Line="1" Column="1" />
-      <File FileName="Assets\GUI\PieceMenuController.js" Line="1" Column="1" />
-      <File FileName="Assets\GUI\MenuButton.js" Line="1" Column="1" />
-      <File FileName="Assets\Pieces\SnapToEdge.js" Line="47" Column="36" />
+      <File FileName="Assets\Circling.js" Line="107" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
