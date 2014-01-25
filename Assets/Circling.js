@@ -125,7 +125,7 @@ function OnCollisionEnter2D(col:Collision2D){
 		collidingCirclings[col.gameObject] = Pair(col, this.transform.position);
 		
 	}
-	else if(col.gameObject.layer == LayerMask.NameToLayer("Static") && col.gameObject.tag != "NoJump"){
+	else if(col.gameObject.layer == LayerMask.NameToLayer("Static")){
 		collidingStatic[col.gameObject] = Pair(col, this.transform.position);
 		Debug.Log("hello");
 		
@@ -141,7 +141,7 @@ function OnCollisionExit2D(col:Collision2D){
 		}
 		collidingCirclings.Remove(col.gameObject);
 		
-	}else if(col.gameObject.layer == LayerMask.NameToLayer("Static") && col.gameObject.tag != "NoJump"){
+	}else if(col.gameObject.layer == LayerMask.NameToLayer("Static")){
 		
 		collidingStatic.Remove(col.gameObject);
 	}
@@ -179,6 +179,9 @@ function IsOnTopOfCircling(){
 function IsNextToWall(){
 	for(var pair:Pair in collidingStatic.Values){
 		var col:Collision2D = pair.First as Collision2D;
+		if(col.gameObject.tag == "Slope")
+			continue;
+		
 		var oldPos:Vector3 = pair.Second;
 		var diff:Vector3 = this.transform.position - oldPos;
 		for(var contact:ContactPoint2D in col.contacts){
